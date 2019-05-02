@@ -1,10 +1,11 @@
 const utils = require('./utils')
+const path = require('path')
 const entries = require('./entries')
 const config = require('../config')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const entry = () => {
+const createEntry = () => {
     const o = {}
     entries.forEach(item => {
         o[item.name] = utils.resolve(item.path)
@@ -14,8 +15,17 @@ const entry = () => {
 const htmlPlugins = () => {
     return entries.map(item => new HtmlWebpackPlugin({
         template: 'index.html',
-        filename: `${item.name}.html`,
-        inject: true
+        filename: isProd ? path.resolve(config.build.indexRoot, `${item.name}.html`) : `${item.name}.html`,
+        chunks: ['manifest', item.name],
+        inject: true,
+        // minify: {
+        //     removeComments: true,
+        //     collapseWhitespace: true,
+        //     removeAttributeQuotes: true,
+        //     minifyJS: true
+        //     // more options:
+        //     // https://github.com/kangax/html-minifier#options-quick-reference
+        // },
     }))
 }
 const createLintingRule = () => ({
@@ -30,13 +40,13 @@ const createLintingRule = () => ({
 })
 const isProd = process.env.NODE_ENV === 'production'
 const baseConfig = {
-    entry,
+    entry: createEntry(),
     output: {
         path: config.build.assetsRoot,
         publicPath: isProd ? config.build.assetsPublicPath
         : config.dev.assetsPublicPath,
         filename: utils.assetsPath(isProd ? 'js/[name].[chunkhash].js' : '[name].js'),
-        chunkFilename: utils.assetsPath(isProd ? 'static/js/[id].[chunkhash].js' : '[id].js')
+        chunkFilename: utils.assetsPath(isProd ? 'js/[id].[chunkhash].js' : '[id].js')
     },
     module: {
         rules: [
@@ -57,28 +67,54 @@ const baseConfig = {
             {
                 test: /\.css$/,
                 use: [
-                    {
+                    isProd ? {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            hmr: !isProd
+                            hmr: true
+                        }
+                    } : 'style-loader',
+                    { 
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
                         }
                     },
-                    'css-loader',
-                    'postcss-loader'
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
                 ]
             },
             {
                 test: /\.less$/,
                 use: [
-                    {
+                    isProd ? {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            hmr: !isProd
+                            hmr: true
+                        }
+                    } : 'style-loader',
+                    { 
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
                         }
                     },
-                    'css-loader',
-                    'postcss-loader',
-                    'less-loader'
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    
                 ]
             },
             {

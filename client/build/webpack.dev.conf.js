@@ -3,12 +3,10 @@ const baseConfig = require('./webpack.base.conf')
 const webpack = require('webpack')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const vConsolePlugin = require('vconsole-webpack-plugin')
-
 const portfinder = require('portfinder')
 const config = require('../config');
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
-
 const devConfig = merge(baseConfig, {
     mode: 'development',
     devtool: config.dev.devtool,

@@ -16,7 +16,8 @@ module.exports = {
         productionSourceMap: true,
         devtool: '#source-map',
         assetsPublicPath: '/',
-        assetsRoot: path.resolve(__dirname, '../server/app/view'),
+        indexRoot: path.resolve(__dirname, '../../server/app/view'),
+        assetsRoot: path.resolve(__dirname, '../../server/app/public'),
         assetsSubDirectory: 'static',
     }
 }

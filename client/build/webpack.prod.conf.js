@@ -10,8 +10,20 @@ const prodConfig = merge(baseConfig, {
     mode: 'production',
     devtool: config.build.productionSourceMap ? config.build.devtool : false,
     optimization: {
+        namedChunks: true,
         runtimeChunk: {
-            name: 'runtime'
+            name: 'manifest'
+        },
+        splitChunks: {
+            cacheGroups: {
+                vue: {
+                    name: 'vue', // 要缓存的 分隔出来的 chunk 名称
+                    test: /[\\/]node_modules[\\/](vue|vuex|vue-router)[\\/]/,
+                    priority: 1, // 缓存组优先级
+                    chunks: 'all',
+                    reuseExistingChunk: true // 可设置是否重用该chunk（查看源码没有发现默认值）
+                },
+            }
         },
         minimizer: [
             new UglifyJsPlugin({
@@ -19,11 +31,7 @@ const prodConfig = merge(baseConfig, {
                 sourceMap: config.build.productionSourceMap
             }),
             new OptimizeCSSAssetsPlugin(),
-        ],
-        splitChunks: {
-            chunks: 'all',
-            minSize: 4000
-        },
+        ]
     },
     plugins: [
         new MiniCssExtractPlugin({
