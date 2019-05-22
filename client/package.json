@@ -1,23 +1,19 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "description": "vue-app",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --process --config build/webpack.dev.conf.js",
-    "debug": "webpack-dev-server --debug --process --config build/webpack.dev.conf.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --fix --ext .js,.vue src"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/leefinder/vue-webpack-egg.git"
-  },
-  "author": "leefinder",
+  "author": "LeeFinder",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
@@ -32,15 +28,17 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-node": "^9.0.1",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^5.2.2",
+    "file-loader": "^3.0.1",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.9.0",
-    "less-loader": "^5.0.0",
+    "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.6.0",
+    "node-notifier": "^5.4.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "ora": "^3.4.0",
     "portfinder": "^1.0.20",
@@ -49,7 +47,7 @@
     "postcss-url": "^8.0.0",
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.1.2",
+    "url-loader": "^1.1.2",
     "vconsole-webpack-plugin": "^1.4.2",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10",
@@ -59,6 +57,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vuex": "^3.1.0"

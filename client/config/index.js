@@ -1,23 +1,22 @@
-const path = require('path')
+const path = require('path');
+
 module.exports = {
     dev: {
-        notifyOnErrors: true,
+        assetsSubDirectory: 'static',
+        assetsPublicPath: '/',
+        host: '0.0.0.0',
         port: 8090,
-        host: 'localhost',
+        notifyOnErrors: true,
         devtool: 'cheap-module-eval-source-map',
-        assetsPublicPath: '/',
-        assetsSubDirectory: 'static',
-        useEslint: true,
-        // If true, eslint errors and warnings will also be shown in the error overlay
-        // in the browser.
-        showEslintErrorsInOverlay: false,
+        showEslintErrorsInOverlay: true,
+        useEslint: true
     },
+
     build: {
-        productionSourceMap: true,
-        devtool: '#source-map',
-        assetsPublicPath: '/',
-        indexRoot: path.resolve(__dirname, '../../server/app/view'),
-        assetsRoot: path.resolve(__dirname, '../../server/app/public'),
+        assetsIndex: path.resolve(__dirname, '../../server/app/view'),
         assetsSubDirectory: 'static',
+        assetsPublicPath: '/',
+        assetsRoot: path.resolve(__dirname, '../../server/app/public'),
+        devtool: '#source-map'
     }
-}
+};

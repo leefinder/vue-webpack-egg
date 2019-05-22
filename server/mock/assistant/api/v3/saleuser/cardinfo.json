@@ -1,0 +1,14 @@
+{
+    "code": 0,
+    "data": {
+        "jobNumber": "string",
+        "name": "string",
+        "phone": "string",
+        "qrCode": "string",
+        "storeAddress": "string",
+        "storeCode": "string",
+        "storeName": "string",
+        "storeTypeName": "领跑中心"
+    },
+    "message": "string"
+}

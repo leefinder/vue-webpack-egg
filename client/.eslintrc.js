@@ -1,5 +1,3 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
   parserOptions: {
@@ -15,21 +13,28 @@ module.exports = {
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
     'standard'
   ],
+  globals: {
+    'LMGetID1': true,
+    'LMZShowQR': true,
+    'LMZShowQRVC': true,
+    'LMZSkipToUrl': true,
+    'LMPopWebView': true,
+    'LMZSkipToUrlQR': true
+  },
   // required to lint *.vue files
   plugins: [
     'vue'
   ],
-  // add your custom rules here
   rules: {
-    // allow async-await
-    'generator-star-spacing': 'off',
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    "indent": ["error", 4],
-    "semi": ["error", "always"],
-    "no-new": 0,
-    "keyword-spacing": ["error", { "before": true, "after": true }],
-    "space-before-function-paren": ["error", "always"],
-    'quotes': ['error', 'single'],
+       // allow async-await
+      'generator-star-spacing': 'off',
+      // allow debugger during development
+      'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+      "indent": ["error", 4],
+      "semi": ["error", "always"],
+      "no-new": 0,
+      "keyword-spacing": ["error", { "before": true, "after": true }],
+      "space-before-function-paren": ["error", "always"],
+      'quotes': ['error', 'single'],
   }
 }

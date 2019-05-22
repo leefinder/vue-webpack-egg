@@ -8,5 +8,5 @@ const entries = [
         name: 'index',
         path: 'src/platform/index.js'
     }
-]
-module.exports = entries
+];
+module.exports = entries;

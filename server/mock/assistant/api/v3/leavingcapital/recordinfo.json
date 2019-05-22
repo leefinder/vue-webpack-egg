@@ -1,0 +1,9 @@
+{
+    "code": 0,
+    "data": {
+        "day": 0,
+        "month": 0,
+        "week": 0
+    },
+    "message": "string"
+}

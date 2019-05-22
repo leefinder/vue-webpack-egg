@@ -1,0 +1,46 @@
+{
+    "code": 0,
+    "data": {
+        "list": [
+            {
+                "appUrl": "string",
+                "details": "string",
+                "h5Url": "string",
+                "identify": "string",
+                "pictureUrl": "",
+                "startTime": "2019-05-16 01:44:31",
+                "status": 0,
+                "stopTime": "2019-05-16 01:44:31",
+                "title": "名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长"
+            },
+            {
+                "appUrl": "string",
+                "details": "string",
+                "h5Url": "string",
+                "identify": "string",
+                "pictureUrl": "",
+                "startTime": "2019-05-16 01:44:31",
+                "status": 0,
+                "stopTime": "2019-05-16 01:44:31",
+                "title": "名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长"
+            },
+            {
+                "appUrl": "string",
+                "details": "string",
+                "h5Url": "string",
+                "identify": "string",
+                "pictureUrl": "",
+                "startTime": "2019-05-16 01:44:31",
+                "status": 0,
+                "stopTime": "2019-05-16 01:44:31",
+                "title": "名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长名字好长",
+                "breakLine": true
+            }
+        ],
+        "pageNum": 0,
+        "pageSize": 0,
+        "pages": 0,
+        "total": 9
+    },
+    "message": "string"
+}

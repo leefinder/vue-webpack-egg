@@ -1,0 +1,11 @@
+{
+    "code": 0,
+    "data": {
+        "qrappUrl": "string",
+        "qrh5Url": "string",
+        "startTime": "2019-05-16 01:44:32",
+        "stopTime": "2019-05-16 01:44:32",
+        "title": "string"
+    },
+    "message": "string"
+}
