@@ -6,7 +6,7 @@ module.exports = () => {
             hostname: '0.0.0.0',
         }
     };
-    config.requestRoot = 'https://lpassis.leapmotor.com';
+    config.requestRoot = '';
     return {
         ...config
     };
