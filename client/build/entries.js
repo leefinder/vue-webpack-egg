@@ -1,12 +1,10 @@
-const entries = [
+module.exports = [
     {
-        name: 'login',
-        path: 'src/login/index.js',
-        template: ''
-    },
-    {
+        root: 'index',
         name: 'index',
-        path: 'src/platform/index.js'
+        title: '',
+        path: '',
+        keywords: '',
+        description: ''
     }
 ];
-module.exports = entries;

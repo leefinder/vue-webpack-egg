@@ -2,26 +2,16 @@
 const utils = require('./utils');
 const webpack = require('webpack');
 const config = require('../config');
-const root = require('./entries');
 const merge = require('webpack-merge');
-const baseWebpackConfig = require('./webpack.base.conf');
+const baseWebpackConfig = require('./webpack.base.config');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const portfinder = require('portfinder');
 const path = require('path');
 const VConsolePlugin = require('vconsole-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const { htmlPlugins } = require('./html.conf');
 const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
-const htmlPlugins = () => {
-    return root.map(item => new HtmlWebpackPlugin({
-        title: `${item.title}`,
-        template: utils.resolve(`${item.template ? item.template : 'index.html'}`),
-        filename: `${item.name}.html`,
-        chunks: [item.name],
-        inject: true
-    }));
-};
 const devWebpackConfig = merge(baseWebpackConfig, {
     mode: 'development',
     devtool: config.dev.devtool, // cheap-module-eval-source-map
@@ -36,21 +26,24 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         quiet: true,
         historyApiFallback: {
             rewrites: [
-                { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'home.html') }
+                { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') }
             ]
         },
         proxy: {
-            '/proxy': 'http://10.192.26.138:19001'
+            '/proxy': 'http://localhost:19001'
         }
     },
     plugins: [
-        ...htmlPlugins(),
         new webpack.DefinePlugin({
             'process.env': require('../config/dev.env')
         }),
+        ...htmlPlugins(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new AddAssetHtmlPlugin({
+            filepath: path.resolve(config.build.assetsRoot, config.build.assetsDllRoot, '*.dll.js')
+        }),
         new VConsolePlugin({
             enable: true
         })

@@ -10,7 +10,7 @@ module.exports = appInfo => {
         }
     };
     config.static = {
-        prefix: '/',
+        prefix: '/public',
         dir: path.join(appInfo.baseDir, 'app/public'),
         dynamic: true,
         preload: false
@@ -34,14 +34,19 @@ module.exports = appInfo => {
     };
     config.security = {
         csrf: {
-            enable: true
+            useSession: false,
+            ignoreJSON: false,          // skip check JSON requests if ignoreJSON set to true
+            sessionName: 'csrfToken',   // csrf token's session name
+            cookieName: 'csrfToken',    // csrf token's cookie name
+            headerName: 'x-csrf-token', // request csrf token's name in header
+            bodyName: '_csrf',          // request csrf token's name in body
+            queryName: '_csrf'
         }
     };
-    const userConfig = {
-
+    config.multipart = {
+        fileExtensions: [ '.doc', '.docx', '.pdf' ] // 增加对 apk 扩展名的文件支持
     };
     return {
         ...config,
-        ...userConfig
     };
 };

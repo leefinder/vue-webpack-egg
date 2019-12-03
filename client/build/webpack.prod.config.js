@@ -3,22 +3,12 @@ const utils = require('./utils');
 const config = require('../config');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
-const baseWebpackConfig = require('./webpack.base.conf');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const baseWebpackConfig = require('./webpack.base.config');
 const OptimizeCss = require('optimize-css-assets-webpack-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const root = require('./entries');
-
-const htmlPlugins = () => {
-    return root.map(item => new HtmlWebpackPlugin({
-        title: `${item.title}`,
-        template: utils.resolve(`${item.template ? item.template : 'index.html'}`),
-        filename: `${config.build.assetsIndex}/${item.name}.html`,
-        chunks: ['manifest', 'vendor', item.name],
-        inject: true
-    }));
-};
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const path = require('path');
+const { htmlPlugins } = require('./html.conf');
 const webpackConfig = merge(baseWebpackConfig, {
     devtool: config.build.devtool,
     output: {
@@ -27,7 +17,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
     },
     optimization: {
-        minimize: true,
         runtimeChunk: {
             name: 'manifest'
         },
@@ -45,11 +34,21 @@ const webpackConfig = merge(baseWebpackConfig, {
         }
     },
     plugins: [
-        ...htmlPlugins(),
         new webpack.DefinePlugin({
             'process.env': require('../config/prod.env')
         }),
-        new OptimizeCss()
+        ...htmlPlugins(),
+        new OptimizeCss(),
+        new AddAssetHtmlPlugin({
+            publicPath: `${config.build.assetsPublicPath}${config.build.assetsDllRoot}`,
+            outputPath: config.build.assetsDllRoot,
+            filepath: path.resolve(config.build.assetsRoot, 'static/dll/*.dll.js')
+        }),
+        new UglifyJsPlugin({
+            cache: true,
+            parallel: true,
+            sourceMap: true
+        })
     ]
 });
 module.exports = webpackConfig;
