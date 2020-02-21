@@ -21,13 +21,9 @@ module.exports = {
         devtool: '#source-map'
     },
     dll: {
-        vue: ['vue', 'vue-router', 'vuex'],
-        axios: ['axios'],
-        clipboard: ['clipboard'],
-        vueAwesomeSwiper: ['vue-awesome-swiper'],
-        qs: ['qs'],
-        nativeshare: ['nativeshare'],
-        mintUi: ['mint-ui'],
+        vue: ['vue', 'mint-ui'],
+        vueTools: ['vue-router', 'vuex', 'vue-awesome-swiper'],
+        utils: ['axios', 'clipboard', 'qs', 'nativeshare'],
         jquery: ['jquery']
     }
 };

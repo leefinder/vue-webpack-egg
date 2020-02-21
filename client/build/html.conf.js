@@ -22,7 +22,13 @@ module.exports = {
             template: utils.resolve(`${item.template ? item.template : 'index.html'}`),
             favicon: utils.resolve('src/static/img/favicon.ico'),
             filename: isProd ? `${config.build.assetsIndex}/${item.root}.html` : `${item.root}.html`,
-            chunks: isProd ? ['manifest', 'vendor', item.name] : [item.name],
+            chunks: isProd ? ['manifest', 'common', 'styles', item.name] : [item.name],
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                minifyCSS: true,
+                minifyJS: true
+            },
             inject: true
         }));
     }

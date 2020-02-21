@@ -176,8 +176,8 @@ const baseConfig = {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: utils.assetsPath(`css/${isProd ? '[name].[hash].css' : '[name].css'}`),
-            chunkFilename: utils.assetsPath(`css/${isProd ? '[id].[hash].css' : '[id].css'}`)
+            filename: utils.assetsPath(`css/${isProd ? '[name].[contenthash].css' : '[name].css'}`),
+            chunkFilename: utils.assetsPath(`css/${isProd ? '[id].[contenthash].css' : '[id].css'}`)
         }),
         ...dllPlugin()
     ]
