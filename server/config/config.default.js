@@ -2,7 +2,7 @@ const path = require('path');
 module.exports = appInfo => {
     const config = exports = {};
     config.keys = appInfo.name + '1556598641693';
-    config.middleware = ['mockData'],
+    config.middleware = ['timeMonitor'],
     config.cluster = {
         listen: {
             port: 19001,

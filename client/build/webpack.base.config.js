@@ -170,7 +170,18 @@ const baseConfig = {
         new HappyPack({
             id: 'js',
             threadPool: happyThreadPool,
-            loaders: ['babel-loader']
+            use: [{
+                loader: 'babel-loader',
+                options: {
+                    cacheDirectory: true,
+                    presets: [[
+                        "@babel/preset-env",
+                        {
+                            "modules": false // 对ES6的模块文件不做转化，以便使用tree shaking、sideEffects等
+                        }
+                    ]]
+                }
+            }]
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
