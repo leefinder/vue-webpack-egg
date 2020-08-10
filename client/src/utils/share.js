@@ -12,12 +12,18 @@ class Share {
         this.initShare();
     }
     initShare () {
-        const shareScript = document.createElement('script');
+        let shareScript = document.querySelector('#shareScript');
+        if (shareScript) {
+            this.shareConfig();
+            return;
+        }
+        shareScript = document.createElement('script');
+        shareScript.id = 'shareScript';
         shareScript.src = 'https://res.wx.qq.com/open/js/jweixin-1.4.0.js';
         const lc = document.body.lastChild;
         document.body.insertBefore(shareScript, lc);
         shareScript.onload = () => {
-            const url = location.origin.indexOf('apptec') !== -1 ? '/wechat/getsignature' : '/wechatweb/getsignatureweb'; // 官网接口 '/wechatweb/getsignatureweb';
+            const url = process.env.NODE_PRO === 'activity' ? '/wechat/getsignature' : '/wechatweb/getsignatureweb'; // 官网接口 '/wechatweb/getsignatureweb';
             axios.get(url, {
                 params: {
                     url: location.href

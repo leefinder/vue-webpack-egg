@@ -3,15 +3,21 @@
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": "usage"
-      }
+          "modules": false
+        }
+      ],
+      "@vue/babel-preset-jsx"
     ],
-    "@vue/babel-preset-jsx"
-  ],
-  "plugins": [
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-transform-runtime",
-    ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    ["@babel/plugin-proposal-class-properties", { "loose": true }]
-  ]
-}
+    "plugins": [
+      "@babel/plugin-syntax-dynamic-import",
+      ["@babel/plugin-transform-runtime",{
+        "corejs": {
+          "version": 3,
+          "proposals": true
+        },
+        "useESModules": true
+      }],
+      ["@babel/plugin-proposal-decorators", { "legacy": true }],
+      ["@babel/plugin-proposal-class-properties", { "loose": true }]
+    ]
+  }

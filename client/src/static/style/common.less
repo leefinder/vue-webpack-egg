@@ -1,0 +1,20 @@
+.pxToRem(@name, @px) {
+    @{name}: unit(@px / 100, rem);
+}
+.padding(@top, @right, @bottom, @left) {
+    padding-top: unit(@top / 100, rem);
+    padding-right: unit(@right / 100, rem);
+    padding-bottom: unit(@bottom / 100, rem);
+    padding-left: unit(@left / 100, rem);
+}
+.boxShadow(@h, @v, @b, @s, @c) {
+    box-shadow: unit(@h / 100, rem) unit(@v / 100, rem) unit(@b / 100, rem) unit(@s / 100, rem) @c;
+}
+.textOverflow(@line) {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: @line;
+    /*! autoprefixer: off */
+    -webkit-box-orient: vertical;
+}

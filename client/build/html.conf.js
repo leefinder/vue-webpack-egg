@@ -3,7 +3,7 @@ const root = require('./entries');
 const isActivity = process.env.NODE_PRO === 'activity';
 const utils = require('./utils');
 const isProd = process.env.NODE_ENV === 'production';
-const buildRoot = !isProd ? root : (isActivity ? root.filter(item => item.isAct) : root.filter(item => !item.isAct));
+const buildRoot = isActivity ? root.filter(item => item.isAct) : root.filter(item => !item.isAct);
 const config = require('../config');
 module.exports = {
     createEntry () {

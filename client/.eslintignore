@@ -2,3 +2,6 @@
 /config/
 /*.js
 /src/utils/nch5.js
+/src/utils/view.js
+/src/activity/router/view.js
+

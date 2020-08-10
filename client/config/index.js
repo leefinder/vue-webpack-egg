@@ -12,10 +12,10 @@ module.exports = {
         useEslint: true
     },
     build: {
-        assetsIndex: path.resolve(__dirname, '../../server/app/view'),
+        assetsIndex: path.resolve(__dirname, '../dist'),
         assetsSubDirectory: 'static/webpack',
         assetsPublicPath: '/public/',
-        assetsRoot: path.resolve(__dirname, '../../server/app/public'),
+        assetsRoot: path.resolve(__dirname, '../dist/public'),
         assetsDllRoot: 'static/dll',
         assetsManifestRoot: 'static/manifest',
         devtool: '#source-map'

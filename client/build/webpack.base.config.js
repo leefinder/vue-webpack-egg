@@ -122,6 +122,7 @@ const baseConfig = {
                     {
                         loader: 'url-loader',
                         options: {
+                            esModule: false,
                             limit: 10000,
                             name: utils.assetsPath('images/[name].[hash:7].[ext]')
                         }
@@ -175,9 +176,18 @@ const baseConfig = {
                 options: {
                     cacheDirectory: true,
                     presets: [[
-                        "@babel/preset-env",
+                        '@babel/preset-env',
                         {
-                            "modules": false // 对ES6的模块文件不做转化，以便使用tree shaking、sideEffects等
+                            modules: false, // 对ES6的模块文件不做转化，以便使用tree shaking、sideEffects等
+                            useBuiltIns: 'usage',
+                            corejs: {
+                                version: 3,
+                                proposals: true
+                            },
+                            targets: {
+                                chrome: '58',
+                                ie: '11'
+                            }
                         }
                     ]]
                 }

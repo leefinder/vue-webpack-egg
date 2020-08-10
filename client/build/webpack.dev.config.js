@@ -10,6 +10,7 @@ const path = require('path');
 const VConsolePlugin = require('vconsole-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const { htmlPlugins } = require('./html.conf');
+const isActivity = process.env.NODE_PRO === 'activity';
 const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
 const devWebpackConfig = merge(baseWebpackConfig, {
@@ -35,7 +36,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': require('../config/dev.env')
+            'process.env': Object.assign(require('../config/dev.env'), {
+                NODE_PRO: isActivity ? '"activity"' : '"website"'
+            })
         }),
         ...htmlPlugins(),
         new webpack.HotModuleReplacementPlugin(),
