@@ -1,6 +1,6 @@
 <script lang="jsx">
 import { deepClone, preventDefault, range } from './utils';
-import TouchMixin from './touchMixin';
+import { TouchMixin } from '@/mixins/touch';
 function getElementTranslateY (element) {
     const style = window.getComputedStyle(element);
     const transform = style.transform || style.webkitTransform;

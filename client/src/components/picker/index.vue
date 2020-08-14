@@ -1,6 +1,5 @@
 <script lang="jsx">
 import PickerColumn from './picker-column.vue';
-import city from './city';
 import { pickerProps } from './props';
 export default {
     components: {
@@ -8,8 +7,8 @@ export default {
     },
     props: {
         ...pickerProps,
-        useTemplate: {
-            default: ''
+        visibleCount: {
+            default: null
         }
     },
     data () {
@@ -19,18 +18,13 @@ export default {
         };
     },
     created () {
-        const { useTemplate, dataType } = this;
-        if (useTemplate) {
-            if (useTemplate === 'addr') {
-                this.formattedColumns = this.formatCascade(city).slice(0, 2);
-            }
-        } else {
-            if (dataType === 'cascade') {
-                this.formattedColumns = this.formatCascade();
-            }
-            if (dataType === 'object') {
-                this.formattedColumns = JSON.parse(JSON.stringify(this.columnList));
-            }
+        const { dataType, visibleCount } = this;
+        if (dataType === 'cascade') {
+            const columns = this.formatCascade();
+            this.formattedColumns = columns.slice(0, visibleCount !== null ? visibleCount : columns.length);
+        }
+        if (dataType === 'object') {
+            this.formattedColumns = JSON.parse(JSON.stringify(this.columnList));
         }
     },
     computed: {
@@ -86,8 +80,8 @@ export default {
             }
         },
         onChange (columnIndex) {
-            const { useTemplate, dataType } = this;
-            if (useTemplate === 'addr' || dataType === 'cascade') {
+            const { dataType } = this;
+            if (dataType === 'cascade') {
                 this.onCascadeChange(columnIndex);
             }
             this.$emit('change', this, this.getValues(), columnIndex);
