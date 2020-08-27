@@ -5,10 +5,11 @@ const HappyPack = require('happypack');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const utils = require('./utils');
 const config = require('../config');
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'pretest';
 const { createEntry } = require('./html.conf');
 const webpack = require('webpack');
 const path = require('path');
+const VConsolePlugin = require('vconsole-webpack-plugin');
 
 const createLintingRule = () => ({
     test: /\.(js|vue)$/,
@@ -163,11 +164,6 @@ const baseConfig = {
         }
     },
     plugins: [
-        // new HappyPack({
-        //     id: 'ts',
-        //     threadPool: happyThreadPool,
-        //     loaders: ['ts-loader']
-        // }),
         new HappyPack({
             id: 'js',
             threadPool: happyThreadPool,
@@ -203,4 +199,11 @@ const baseConfig = {
         ...dllPlugin()
     ]
 };
+if (process.env.NODE_ENV !== 'production') {
+    baseConfig.plugins.push(
+        new VConsolePlugin({
+            enable: true
+        })
+    );
+}
 module.exports = baseConfig;

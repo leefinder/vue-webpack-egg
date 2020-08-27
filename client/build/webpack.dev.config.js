@@ -7,10 +7,8 @@ const baseWebpackConfig = require('./webpack.base.config');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const portfinder = require('portfinder');
 const path = require('path');
-const VConsolePlugin = require('vconsole-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const { htmlPlugins } = require('./html.conf');
-const isActivity = process.env.NODE_PRO === 'activity';
 const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
 const devWebpackConfig = merge(baseWebpackConfig, {
@@ -31,14 +29,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             ]
         },
         proxy: {
-            '/proxy': 'http://localhost:19001'
+            '/proxy': 'http://localhost:19091'
         }
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': Object.assign(require('../config/dev.env'), {
-                NODE_PRO: isActivity ? '"activity"' : '"website"'
-            })
+            'process.env': require('../config/dev.env')
         }),
         ...htmlPlugins(),
         new webpack.HotModuleReplacementPlugin(),
@@ -46,9 +42,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         new webpack.NoEmitOnErrorsPlugin(),
         new AddAssetHtmlPlugin({
             filepath: path.resolve(config.build.assetsRoot, config.build.assetsDllRoot, '*.dll.js')
-        }),
-        new VConsolePlugin({
-            enable: true
         })
     ]
 });

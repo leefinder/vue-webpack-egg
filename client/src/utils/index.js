@@ -1,3 +1,6 @@
+import Vue from 'vue';
+export const inBrowser = typeof window !== 'undefined';
+export const isServer = Vue.prototype.$isServer;
 export function isObject (val) {
     return val !== null && typeof val === 'object';
 }

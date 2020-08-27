@@ -1,21 +1,19 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const root = require('./entries');
-const isActivity = process.env.NODE_PRO === 'activity';
 const utils = require('./utils');
-const isProd = process.env.NODE_ENV === 'production';
-const buildRoot = isActivity ? root.filter(item => item.isAct) : root.filter(item => !item.isAct);
+const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'pretest';
 const config = require('../config');
 module.exports = {
     createEntry () {
         const entries = {};
-        buildRoot.forEach(item => {
+        root.forEach(item => {
             const { name, path } = item;
             entries[name] = utils.resolve(path);
         });
         return entries;
     },
     htmlPlugins () {
-        return buildRoot.map(item => new HtmlWebpackPlugin({
+        return root.map(item => new HtmlWebpackPlugin({
             title: `${item.title}`,
             keywords: `${item.keywords}`,
             description: `${item.description}`,

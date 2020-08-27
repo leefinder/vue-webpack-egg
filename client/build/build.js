@@ -1,5 +1,4 @@
 'use strict';
-process.env.NODE_ENV = 'production';
 const chalk = require('chalk');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.prod.config');

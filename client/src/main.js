@@ -6,11 +6,11 @@ import MetaInfo from 'vue-meta-info';
 import VueLazyload from 'vue-lazyload';
 import App from './App';
 import router from './router';
-import toastRegistry from '@/components/message/message';
+import Message from '@/components/message/message';
 
 import '@/static/font/SourceHanSansCN-Regular/SourceHanSansCN-Regular.css';
 import '@/static/font/SourceHanSansCN-Light/SourceHanSansCN-Light.css';
-Vue.use(toastRegistry);
+Vue.use(Message);
 Vue.use(VueLazyload);
 Vue.use(MetaInfo);
 Vue.use(VueRouter);

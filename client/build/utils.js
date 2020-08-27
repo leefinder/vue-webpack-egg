@@ -1,6 +1,7 @@
 const path = require('path');
 const config = require('../config');
 const packageConfig = require('../package.json');
+const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'pretest';
 function resolve (dir) {
     return path.join(__dirname, '..', dir);
 }
@@ -22,7 +23,7 @@ const createNotifierCallback = () => {
     };
 };
 const assetsPath = (_path) => {
-    const assetsSubDirectory = process.env.NODE_ENV === 'production'
+    const assetsSubDirectory = isProd
         ? config.build.assetsSubDirectory
         : config.dev.assetsSubDirectory;
     return path.posix.join(assetsSubDirectory, _path);

@@ -3,8 +3,9 @@ module.exports = [
         root: 'index',
         name: 'index',
         title: '',
-        path: '',
+        path: './src/main.js',
         keywords: '',
-        description: ''
+        description: '',
+        template: 'index.html'
     }
 ];

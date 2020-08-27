@@ -1,7 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
+const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'pretest';
 const host = `${location.protocol === 'https:' ? 'https:' : 'http:'}//${location.host}`;
-const proxy = process.env.NODE_ENV === 'production' ? '' : '/proxy';
+const proxy = isProd ? '' : '/proxy';
 const commonUrl = `${host}${proxy}`;
 const HTTP_STATUS = {
     SUCCESS: 200,
